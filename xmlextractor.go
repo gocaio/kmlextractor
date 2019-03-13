@@ -15,15 +15,27 @@
  under the License.
 */
 
-package xmlextractor
+package main
+
+import (
+	"bufio"
+	"encoding/xml"
+	"fmt"
+	"os"
+)
+
+//KML struct contains blablabla
+type KML struct {
+	Doc Document `xml:"Document"`
+}
 
 //Document struct contains blablabla
 type Document struct {
+	//XMLName xml.Name
 	Name   string   `xml:"name"`
-	StyleM StyleMap `xml:"msn_ylw-pushpin"`
-	Style1 Style    `xml:"sn_ylw-pushpin"`
-	Style2 Style    `xml:"sh_ylw-pushpin"`
-	F      Folder   `xml:"Folder"`
+	StyleM StyleMap `xml:"StyleMap"`
+	Style  []Style  `xml:"Style"`
+	// F      Folder   `xml:"Folder"`
 }
 
 //StyleMap struct contains blablabla
@@ -34,7 +46,7 @@ type StyleMap struct {
 //Pair struct contains blablabla
 type Pair struct {
 	Key      string `xml:"key"`
-	StyleURL string `xml:"styleURL"`
+	StyleURL string `xml:"styleUrl"`
 }
 
 //Style struct contains blablabla
@@ -45,8 +57,22 @@ type Style struct {
 
 //IconStyle struct contains blablabla
 type IconStyle struct {
-	Scale int    `xml:"scale"`
-	Icon  string `xml:"Icon"`
+	Scale string  `xml:"scale"`
+	Ico   Icon    `xml:"Icon"`
+	HS    HotSpot `xml:"hotSpot"`
+}
+
+//Icon struct contains
+type Icon struct {
+	Href string `xml:"href"`
+}
+
+//HotSpot struct contains
+type HotSpot struct {
+	X      string `xml:"x,attr"`
+	Y      string `xml:"y,attr"`
+	Xunits string `xml:"xunits,attr"`
+	Yunits string `xml:"yunits,attr"`
 }
 
 //LineStyle struct contains blablabla
@@ -75,4 +101,22 @@ type LineString struct {
 
 func main() {
 
+	file, err := os.Open("samples/kml_2/doc.kml")
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer file.Close()
+
+	var xmlFile string
+	var metadata KML
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		xmlFile += scanner.Text()
+	}
+	// fmt.Println(xmlFile)
+	if err := xml.Unmarshal([]byte(xmlFile), &metadata); err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(metadata.Doc)
 }
