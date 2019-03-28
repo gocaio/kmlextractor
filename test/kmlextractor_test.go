@@ -18,8 +18,8 @@
 package test
 
 import (
-	"github.com/kevinborras/kmlextractor/model"
 	"github.com/kevinborras/kmlextractor"
+	"github.com/kevinborras/kmlextractor/model"
 	"log"
 	"os"
 	"reflect"
