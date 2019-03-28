@@ -22,7 +22,7 @@ import (
 	"github.com/kevinborras/kmlextractor"
 	"log"
 	"os"
-	// "reflect"
+	"reflect"
 )
 
 func main() {
@@ -36,14 +36,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println(content)
-	// s := reflect.ValueOf(&content).Elem()
-	// typeOfT := s.Type()
-	// for i := 0; i < s.NumField(); i++ {
-	// 	f := s.Field(i)
-	// 	fmt.Printf("%d: %s = %v\n", i,
-	// 		typeOfT.Field(i).Name, f.Interface())
-	// }
+	s := reflect.ValueOf(&content).Elem()
+	typeOfContent := s.Type()
+	for i := 0; i < s.NumField(); i++ {
+		f := s.Field(i)
+		fmt.Printf("%d: %s = %v\n", i,
+			typeOfContent.Field(i).Name, f.Interface())
+	}
 
 	// aux := kmlextractor.GetInterestingContent(&content)
 	// s := reflect.ValueOf(&aux).Elem()
