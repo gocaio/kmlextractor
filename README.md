@@ -1,5 +1,6 @@
 # kmlExtractor
 
+[![Build Status](https://travis-ci.org/kevinborras/kmlextractor.svg?branch=master)](https://travis-ci.org/kevinborras/kmlextractor)
 [![Go Report Card](https://goreportcard.com/badge/github.com/kevinborras/kmlextractor)](https://goreportcard.com/badge/github.com/kevinborras/kmlextractor)
 
 KML data extractor written in Go.  
