@@ -17,16 +17,6 @@ import (
     "os"
 )
 
-package main
-
-import (
-    "fmt"
-    "github.com/kevinborras/kmlextractor"
-    "log"
-    "os"
-    "reflect"
-)
-
 func main() {
     file, err := os.Open(`../samples/kml_3.kml`)
     if err != nil {
