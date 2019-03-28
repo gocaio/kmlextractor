@@ -1,5 +1,7 @@
 # kmlExtractor
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/kevinborras/kmlextractor)](https://goreportcard.com/badge/github.com/kevinborras/kmlextractor)
+
 KML data extractor written in Go.  
 
 ## How to use
